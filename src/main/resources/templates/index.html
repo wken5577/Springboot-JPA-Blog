@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "~{fragment/head :: head}">
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <th:block th:replace = "~{fragment/nav :: nav-bar}"></th:block>
+
+  <div class = "container">
+    <div class="card m-2" th:each = "board : ${boardPage.content}">
+      <div class="card-body">
+        <h4 class="card-title"th:text = "${board.title}">제목 적는부분</h4>
+        <a href="#" class="btn btn-primary">상세보기</a>
+      </div>
+    </div>
+
+    <ul class="pagination justify-content-center">
+      <li class="page-item" th:class ="${boardPage.number} == 0? 'page-item disabled' : 'page-item' ">
+        <a class="page-link"th:href="@{/(page = ${boardPage.number}-1)}">Previous</a>
+      </li>
+      <li class="page-item" th:each="number:${pageNum}">
+        <a class="page-link" th:class ="${number} - 1 == ${boardPage.number} ? 'page-link  bg-primary text-white' : 'page-link' "
+           href="#" th:href="@{/(page = ${number} - 1)}" th:text = "${number}">1</a>
+      </li>
+      <li class="page-item" th:class ="${boardPage.hasNext} == false? 'page-item disabled' : 'page-item' ">
+        <a class="page-link" th:href="@{/(page = ${boardPage.number}+1)}">Next</a>
+      </li>
+    </ul>
+
+  </div>
+
+  <th:block th:replace = "~{fragment/footer :: footer}"></th:block>
+  <th:block th:replace = "~{fragment/footer :: scripts}"></th:block>
+
+</body>
+</html>
+
+

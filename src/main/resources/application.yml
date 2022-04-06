@@ -4,3 +4,23 @@ spring:
     url: jdbc:mysql://localhost:3305/blog?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+  devtools:
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    cache: false
+  resources:
+    cache-period: 0
