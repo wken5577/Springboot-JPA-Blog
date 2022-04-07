@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class IndexBoardDto {
-    private String title;
-    private Long id;
+public class BoardDto {
 
-    public IndexBoardDto(Board board) {
-        this.title = board.getTitle();
+    private Long id;
+    private String title;
+    private String content;
+
+    public BoardDto(Board board) {
         this.id = board.getId();
+        this.title = board.getTitle();
+        this.content = board.getContent();
     }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "~{fragment/head :: head}">
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <th:block th:replace = "~{fragment/nav :: nav-bar}"></th:block>
+
+  <div class = "container mt-3 mb-3">
+      <div class="row mb-3">
+        <div class = "col-12">
+          <button class = "btn btn-secondary" onclick="history.back()">돌아가기</button>
+          <th:block th:if ="${board.writerId} == ${#authentication.principal.user.id}">
+            <a th:href = "@{/board/{boardId}/updateForm(boardId = ${board.id})}" class = "btn btn-warning">수정</a>
+            <button id = "btn-delete" class = "btn btn-danger">삭제</button>
+          </th:block>
+        </div>
+      </div>
+
+    <div class="row mb-2">
+      <div class = "col-12">
+        <div>
+          글 번호 : <span id = "boardId"><i th:text = "${board.id}"></i></span>
+          작성자 : <span><i th:text = "${board.writer}"></i></span>
+        </div>
+      </div>
+    </div>
+
+      <div class="row">
+        <div class = "col-12">
+          <h3 th:text = "${board.title}"></h3>
+          <hr/>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class = "col-12">
+        <p th:utext = "${board.content}"></p>
+        <hr/>
+      </div>
+    </div>
+
+  </div>
+
+  <th:block th:replace = "~{fragment/footer :: footer}"></th:block>
+  <th:block th:replace = "~{fragment/footer :: scripts}"></th:block>
+  <script src = "/js/board.js"></script>
+
+</body>
+</html>
+
+

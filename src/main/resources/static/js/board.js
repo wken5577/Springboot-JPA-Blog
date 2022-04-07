@@ -3,7 +3,12 @@ let index = {
             $("#btn-save").on("click", () => {
                 this.save();
             });
-
+             $("#btn-delete").on("click", () => {
+                this.deleteById();
+             });
+            $("#btn-update").on("click", () => {
+                this.update();
+             });
         },
 
         save: function(){
@@ -24,7 +29,43 @@ let index = {
             }).fail(function(error){
                 alert(JSON.stringify(error));
             });
+        },
 
-        }
+           deleteById: function(){
+                    let id = $("#boardId").text();
+
+                    $.ajax({
+                        type:"DELETE",
+                        url :"/api/board/" + id,
+                        dataType: "json"
+                    }).done(function(resp){
+                        alert("삭제가 완료되었습니다");
+                        location.href = "/";
+                    }).fail(function(error){
+                        alert(JSON.stringify(error));
+                    });
+
+                },
+
+                 update: function(){
+                           let boardId = $("#boardId").val();
+                            let data = {
+                                title: $("#title").val(),
+                                content: $("#content").val(),
+                            };
+
+                            $.ajax({
+                                type:"PUT",
+                                url :"/api/board/"+boardId,
+                                data: JSON.stringify(data),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json"
+                            }).done(function(resp){
+                                alert("업데이트가 완료되었습니다");
+                                location.href = "/";
+                            }).fail(function(error){
+                                alert(JSON.stringify(error));
+                            });
+                        }
 }
 index.init();

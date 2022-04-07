@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "~{fragment/head :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:replace = "~{fragment/nav :: nav-bar}"></th:block>
+
+    <div class = "container mt-3 mb-3" th:with = "user=${#authentication.principal.user}" >
+        <form>
+            <div class="form-group">
+                <label for="username">UserName:</label>
+                <input type="text" class="form-control" placeholder="Enter username" id="username" th:value = "${user.username}"readonly>
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" placeholder="Enter password" id="password"
+                       th:disabled="${user.loginType != T(hello.cos.blog.model.LoginType).NORMAL}" />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" placeholder="Enter email" id="email" th:value = "${user.email}"
+                       th:disabled="${user.loginType != T(hello.cos.blog.model.LoginType).NORMAL}" />
+            </div>
+        </form>
+
+        <button id = "btn-update" class="btn btn-primary"  th:disabled="${user.loginType != T(hello.cos.blog.model.LoginType).NORMAL}" >회원정보수정</button>
+    </div>
+
+    <th:block th:replace = "~{fragment/footer :: footer}"></th:block>
+    <th:block th:replace = "~{fragment/footer :: scripts}"></th:block>
+    <script src = "/js/user.js"></script>
+
+</body>
+</html>
+
+
