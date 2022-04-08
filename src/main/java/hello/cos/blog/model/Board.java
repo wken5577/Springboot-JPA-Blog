@@ -31,7 +31,8 @@ public class Board extends BaseTimeEntity{
     private User user;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reply> reply = new ArrayList<>();
+    @OrderBy("id desc")
+    private List<Reply> replyList = new ArrayList<>();
 
     public Board(String title, String content, User user) {
         this.title = title;

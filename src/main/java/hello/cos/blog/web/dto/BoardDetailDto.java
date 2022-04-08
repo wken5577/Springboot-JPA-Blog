@@ -1,10 +1,10 @@
 package hello.cos.blog.web.dto;
 
 import hello.cos.blog.model.Board;
-import hello.cos.blog.model.Reply;
 import lombok.Data;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class BoardDetailDto {
@@ -15,7 +15,7 @@ public class BoardDetailDto {
     private String writer;
     private Long writerId;
     private int count;
-    private List<Reply> replyList;
+    private List<ReplyDto> replyList;
 
 
     public BoardDetailDto(Board board) {
@@ -25,6 +25,7 @@ public class BoardDetailDto {
         this.title = board.getTitle();
         this.content = board.getContent();
         this.count = board.getCount();
-        this.replyList = board.getReply();
+        this.replyList = board.getReplyList().stream()
+                .map(ReplyDto::new).collect(Collectors.toList());
     }
 }

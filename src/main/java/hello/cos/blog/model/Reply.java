@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
 @Getter
 @Entity
 public class Reply extends BaseTimeEntity{
@@ -26,6 +25,10 @@ public class Reply extends BaseTimeEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
-
-
+    public Reply(String content, Board board, User user) {
+        board.getReplyList().add(this);
+        this.content = content;
+        this.user = user;
+        this.board = board;
+    }
 }
